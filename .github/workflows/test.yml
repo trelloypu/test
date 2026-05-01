@@ -1,0 +1,17 @@
+name: Simple Check
+
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check files exist
+        run: |
+          test -f index.html || { echo "❌ index.html missing"; exit 1; }
+          test -f app.js || { echo "❌ app.js missing"; exit 1; }
+          echo "✅ Files are OK"
